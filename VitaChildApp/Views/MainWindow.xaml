@@ -14,5 +14,10 @@
                 <MenuItem Header="Exit" Command="{Binding Path=ExitAppCommand}" />
             </MenuItem>
         </Menu>
+        <TabControl>
+            <TabItem Header="Meal Planner"/>
+            <TabItem Header="Menu1"/>
+            <TabItem Header="Menu2"/>
+        </TabControl>
     </StackPanel>
 </Window>
