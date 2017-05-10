@@ -4,43 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VitaChildApp.Views"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
+             d:DesignHeight="700" d:DesignWidth="1000">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding MealPlannerLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <StackPanel Background="Yellow">
         <StackPanel>
-                <Menu>
-                    <MenuItem Header="Menu Tools">
-                        <MenuItem Header="Create New Menu"/>
-                        <MenuItem Header="Delete Menu"/>
-                    </MenuItem>
-                </Menu>
-                <ComboBox>
-                    <ComboBoxItem>Infant Meals</ComboBoxItem>
-                    <ComboBoxItem>Non-nfant Meals</ComboBoxItem>
-                </ComboBox>
-                <Button Content="Calendar" Width="100" HorizontalAlignment="Left" Margin="5"/>
-                <StackPanel Orientation="Horizontal">
-                    <ListView Width="400" Height="100">
-                        <ListBoxItem Content="Juice n shit"></ListBoxItem>
-                        <ListBoxItem Content="Juice n shit"></ListBoxItem>
-                        <ListBoxItem Content="Juice n shit"></ListBoxItem>
-                    </ListView>
-                    <ListView Width="400" Height="100">
-                        <ListBoxItem Content="Juice n shit"></ListBoxItem>
-                        <ListBoxItem Content="Juice n shit"></ListBoxItem>
-                        <ListBoxItem Content="Juice n shit"></ListBoxItem>
-                    </ListView>
-                </StackPanel>
-                <ListView Width="1000" Height="400">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <ListView Width="200" Height="200" Margin="5"></ListView>
-                        <ListView Width="200" Height="200" Margin="5"></ListView>
-                        <ListView Width="200" Height="200" Margin="5"></ListView>
-                        <ListView Width="200" Height="200" Margin="5"></ListView>
-                    </StackPanel>
-                </ListView>
-            </StackPanel>
-            <TabItem Header="Menu1"/>
-            <TabItem Header="Menu2"/>
+            <Calendar Width="200" HorizontalAlignment="Left" Margin="5" Height="30"/>
+            <Menu Height="40" Background="DarkGray" Margin="5">
+                <MenuItem Header="Home" Height="40" Margin="5" Background="Gray" Command="{Binding Path=HomeMealCommand}"/>
+                <MenuItem Header="Create Menu" Height="40" Margin="5" Background="Gray" Command="{Binding Path=CreateMealCommand}"/>
+                <MenuItem Header="Edit Food" Height="40" Margin="5" Background="Gray" Command="{Binding Path=EditMealCommand}"/>
+            </Menu>
+            <ContentControl prism:RegionManager.RegionName="MealMenuContent"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>

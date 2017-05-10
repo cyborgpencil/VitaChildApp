@@ -5,12 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VitaChildApp"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         prism:ViewModelLocator.AutoWireViewModel="True"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Vita Child App" Height="768" Width="1024">
-    <StackPanel>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding MainWindowLoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <StackPanel Background="AliceBlue">
         <Menu>
             <MenuItem Header="File">
+                <Separator/>
                 <MenuItem Header="Exit" Command="{Binding Path=ExitAppCommand}" />
             </MenuItem>
         </Menu>
@@ -19,5 +27,6 @@
             <TabItem Header="Menu1"/>
             <TabItem Header="Menu2"/>
         </TabControl>
+        <ContentControl prism:RegionManager.RegionName="NavigationRegion"/>
     </StackPanel>
 </Window>

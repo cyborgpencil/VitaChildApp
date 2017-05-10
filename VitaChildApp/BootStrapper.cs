@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Prism.Unity;
+﻿using Prism.Unity;
 using System.Windows;
 using Microsoft.Practices.Unity;
 using VitaChildApp.Views;
@@ -20,6 +15,14 @@ namespace VitaChildApp
         protected override void InitializeShell()
         {
             Application.Current.MainWindow.Show();
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+
+            Container.RegisterTypeForNavigation<MealPlannerView>();
+            Container.RegisterTypeForNavigation<CreateMenuView>();
         }
     }
 }

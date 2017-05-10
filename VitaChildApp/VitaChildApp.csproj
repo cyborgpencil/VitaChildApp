@@ -86,9 +86,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MealPlannerViewModel.cs" />
+    <Compile Include="Views\CreateMenuView.xaml.cs">
+      <DependentUpon>CreateMenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MealPlannerView.xaml.cs">
       <DependentUpon>MealPlannerView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CreateMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,9 +144,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\meatpng.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\vca_icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\drinks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\veggies.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bread.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

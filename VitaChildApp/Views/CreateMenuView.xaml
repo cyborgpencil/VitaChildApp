@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="VitaChildApp.Views.CreateMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VitaChildApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <StackPanel Background="Gray">
+        <StackPanel>
+            <TextBlock Text="Age Group" Margin="5"/>
+            <ComboBox Width="700" Height="15" HorizontalAlignment="Left">
+            </ComboBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <RadioButton Content="BreakFast" Margin="5"/>
+                <RadioButton Content="Snack" Margin="5"/>
+                <RadioButton Content="Lunch/Supper" Margin="5"/>
+            </StackPanel>
+            <StackPanel Background="LightGray" Margin="5">
+                <TextBlock Margin="5" Text="Current Meal:"/>
+                <TextBox Margin="5" Width="500" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Background="Ivory" Margin="5" Width="520" HorizontalAlignment="Left">
+                    <TextBlock Text="Current Food List:" Margin="2"/>
+                    <ListView Width="500" Height="150" HorizontalAlignment="Left" Margin="5"/>
+                </StackPanel>
+                <StackPanel Background="Ivory" Margin="5" Width="450" HorizontalAlignment="Left">
+                    <TextBlock Text="Create, Edit and Remove Food Items:" Margin="2"/>
+                    <TextBox Width="400" HorizontalAlignment="Left" Margin="5"/>
+                    <Button Content="Add" Width="50" HorizontalAlignment="Left" Margin="5"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Background="AliceBlue" Margin="5" Height="270" Width="200" HorizontalAlignment="Left">
+                <TextBlock Text="Food Category:" Margin="5"/>
+                <StackPanel Orientation="Horizontal">
+                <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\drinks.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
+                <CheckBox />
+                    <TextBlock Text="Milk/Liquids" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\meatpng.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
+                <CheckBox />
+                    <TextBlock Text="Meat/Other" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\veggies.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
+                    <CheckBox />
+                    <TextBlock Text="Vegetables" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\bread.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
+                    <CheckBox />
+                    <TextBlock Text="Breads" Margin="5"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
