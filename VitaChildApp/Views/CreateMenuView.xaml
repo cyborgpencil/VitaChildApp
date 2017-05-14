@@ -4,31 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VitaChildApp.Views"
+             xmlns:Converters="clr-namespace:VitaChildApp.Converters"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CreateMenuLoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <StackPanel Background="Gray">
         <StackPanel>
             <TextBlock Text="Age Group" Margin="5"/>
             <ComboBox Width="700" Height="15" HorizontalAlignment="Left">
             </ComboBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton Content="BreakFast" Margin="5"/>
+                <RadioButton Content="Breakfast" Margin="5" IsChecked="{Binding Path=BreakfastBindable, Mode=TwoWay}"/>
                 <RadioButton Content="Snack" Margin="5"/>
                 <RadioButton Content="Lunch/Supper" Margin="5"/>
             </StackPanel>
-            <StackPanel Background="LightGray" Margin="5">
-                <TextBlock Margin="5" Text="Current Meal:"/>
-                <TextBox Margin="5" Width="500" HorizontalAlignment="Left"/>
+            <StackPanel Background="LightGray" Margin="2">
+                <TextBlock Margin="2" Text="Current Meal:"/>
+                <TextBox Margin="2" Width="500" HorizontalAlignment="Left"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <StackPanel Background="Ivory" Margin="5" Width="520" HorizontalAlignment="Left">
+                <StackPanel Background="Ivory" Margin="5" Width="400" HorizontalAlignment="Left">
                     <TextBlock Text="Current Food List:" Margin="2"/>
-                    <ListView Width="500" Height="150" HorizontalAlignment="Left" Margin="5"/>
+                    <ListView Width="390" Height="150" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Path=FullFoodItemsNamesList, Mode=TwoWay}" SelectedItem="{Binding Path=SelFoodItemBind, Mode=TwoWay}"/>
                 </StackPanel>
-                <StackPanel Background="Ivory" Margin="5" Width="450" HorizontalAlignment="Left">
+                <StackPanel>
+                    <Button Content="ADD TO LIST" Width="100" Height="50" Margin="10,5,10,20" Background="LightSkyBlue" Command="{Binding Path=AddFoodItemCommand}"/>
+                    <Button Content="REMOVE FROM LIST" Width="120" Height="50" Margin="10,5,10,20" Background="LightSkyBlue"/>
+                </StackPanel>
+                <StackPanel Background="Ivory" Margin="5" Width="430" HorizontalAlignment="Left">
                     <TextBlock Text="Create, Edit and Remove Food Items:" Margin="2"/>
-                    <TextBox Width="400" HorizontalAlignment="Left" Margin="5"/>
-                    <Button Content="Add" Width="50" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBox Width="400" HorizontalAlignment="Left" Margin="5" Text="{Binding Path=WorkingFoodItem.ItemName, Mode=TwoWay}" />
+                    <TextBlock Text="Ingredients:" Margin="5"/>
+                    <Button Content="Add Ingredient" Width="100" HorizontalAlignment="Left" Margin="5" Command="{Binding Path=AddIngredientsCommand}"/>
+                    <TextBlock Text="Type Name of Ingredient to add:" Margin="2"/>
+                    <TextBox Margin="2" Text="{Binding Path=CurrentIngredientBind}"/>
+                    <TextBlock Text="Current Ingredient List:" Margin="2"/>
+                    <ComboBox IsEditable="True" SelectedIndex="{Binding Path=IndexCount}" Height="20" Margin="5" Background="LightGray" ItemsSource="{Binding Path=WorkingFoodItem.IngredientsList}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Background="AliceBlue" Margin="5" Height="270" Width="200" HorizontalAlignment="Left">

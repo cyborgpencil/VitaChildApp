@@ -26,7 +26,7 @@ namespace VitaChildApp.ViewModels
         {
             ExitAppCommand = new DelegateCommand(ExitApp);
             MainWindowLoadedCommand = new DelegateCommand(MainWindowLoaded);
-           
+            
         }
 
         public MainWindowViewModel( IRegionManager regionManager) :this()
@@ -48,6 +48,7 @@ namespace VitaChildApp.ViewModels
         private void MainWindowLoaded()
         {
             Navigate("MealPlannerView");
+
         }
     }
 }

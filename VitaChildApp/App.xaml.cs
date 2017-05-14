@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using VitaChildApp.Utilities;
 
 namespace VitaChildApp
 {
@@ -12,6 +13,10 @@ namespace VitaChildApp
             base.OnStartup(e);
             var bs = new BootStrapper();
             bs.Run();
+
+            // File Management
+            FileManager.Instance.CreateWorkingFolders();
+
         }
     }
 }

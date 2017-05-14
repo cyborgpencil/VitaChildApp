@@ -85,6 +85,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\FoodItemToStringConverter.cs" />
+    <Compile Include="Models\FoodItem.cs" />
+    <Compile Include="Utilities\FileManager.cs" />
+    <Compile Include="Utilities\FoodItemsFileManager.cs" />
+    <Compile Include="ViewModels\CreateMenuViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MealPlannerViewModel.cs" />
     <Compile Include="Views\CreateMenuView.xaml.cs">
