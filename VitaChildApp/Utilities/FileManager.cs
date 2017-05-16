@@ -6,11 +6,12 @@ namespace VitaChildApp.Utilities
     public class FileManager
     {
         private static FileManager instance;
-        public string _workingFolder;
+        public string WorkingFolder;
+        
 
         private FileManager()
         {
-            _workingFolder = "Food Items";
+            WorkingFolder = "Food Items";
         }
 
         public static FileManager Instance
@@ -27,9 +28,9 @@ namespace VitaChildApp.Utilities
 
         public void CreateWorkingFolders()
         {
-            if (!Directory.Exists(_workingFolder))
+            if (!Directory.Exists(WorkingFolder))
             {
-                Directory.CreateDirectory(_workingFolder);
+                Directory.CreateDirectory(WorkingFolder);
             }
         }
     }

@@ -20,6 +20,7 @@
             <MenuItem Header="File">
                 <Separator/>
                 <MenuItem Header="Exit" Command="{Binding Path=ExitAppCommand}" />
+                <MenuItem Header="Open Application Folder" Command="{Binding Path=OpenAppFolderCommand}" />
             </MenuItem>
         </Menu>
         <TabControl>

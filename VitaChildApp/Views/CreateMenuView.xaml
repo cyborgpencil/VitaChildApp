@@ -32,18 +32,21 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Background="Ivory" Margin="5" Width="400" HorizontalAlignment="Left">
-                    <TextBlock Text="Current Food List:" Margin="2"/>
-                    <ListView Width="390" Height="150" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Path=FullFoodItemsNamesList, Mode=TwoWay}" SelectedItem="{Binding Path=SelFoodItemBind, Mode=TwoWay}"/>
+                    <TextBlock Text="{Binding Path=CurrentFoodListBind, Mode=TwoWay}" Margin="2"/>
+                    <ListView Width="390" Height="150" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Path=FullFoodItemsNamesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelFoodItemBind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding Path=WorkingFoodItemIndex}"/>
                 </StackPanel>
                 <StackPanel>
-                    <Button Content="ADD TO LIST" Width="100" Height="50" Margin="10,5,10,20" Background="LightSkyBlue" Command="{Binding Path=AddFoodItemCommand}"/>
-                    <Button Content="REMOVE FROM LIST" Width="120" Height="50" Margin="10,5,10,20" Background="LightSkyBlue"/>
+                    <Button Content="ADD TO LIST" Width="100" Height="50" Margin="10,2,10,10" Background="LightSkyBlue" Command="{Binding Path=AddFoodItemCommand}"/>
+                    <Button Content="REMOVE FROM LIST" Width="120" Height="50" Margin="10,2,10,10" Background="LightPink" Command="{Binding Path=DeleteFoodItemCommand}"/>
+                    <Button Content="SAVE FOOD LIST" Width="120" Height="50" Margin="10,2,10,10" Background="LightPink" Command="{Binding Path=SaveFoodItemCommand}"/>
                 </StackPanel>
                 <StackPanel Background="Ivory" Margin="5" Width="430" HorizontalAlignment="Left">
                     <TextBlock Text="Create, Edit and Remove Food Items:" Margin="2"/>
                     <TextBox Width="400" HorizontalAlignment="Left" Margin="5" Text="{Binding Path=WorkingFoodItem.ItemName, Mode=TwoWay}" />
                     <TextBlock Text="Ingredients:" Margin="5"/>
-                    <Button Content="Add Ingredient" Width="100" HorizontalAlignment="Left" Margin="5" Command="{Binding Path=AddIngredientsCommand}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Add/Save Ingredient" Width="120" HorizontalAlignment="Left" Margin="5" Command="{Binding Path=AddIngredientsCommand}"/>
+                    </StackPanel>
                     <TextBlock Text="Type Name of Ingredient to add:" Margin="2"/>
                     <TextBox Margin="2" Text="{Binding Path=CurrentIngredientBind}"/>
                     <TextBlock Text="Current Ingredient List:" Margin="2"/>

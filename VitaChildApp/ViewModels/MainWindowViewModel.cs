@@ -2,6 +2,9 @@
 using Prism.Mvvm;
 using Prism.Regions;
 using System.Windows;
+using System.IO;
+using System.Diagnostics;
+using VitaChildApp.Utilities;
 
 namespace VitaChildApp.ViewModels
 {
@@ -20,13 +23,18 @@ namespace VitaChildApp.ViewModels
             get { return _mainWindowLoadedCommand; }
             set { SetProperty(ref _mainWindowLoadedCommand, value); }
         }
-
+        private DelegateCommand _openAppFolderCommand;
+        public DelegateCommand OpenAppFolderCommand
+        {
+            get { return _openAppFolderCommand; }
+            set { SetProperty(ref _openAppFolderCommand, value); }
+        }
 
         public MainWindowViewModel()
         {
             ExitAppCommand = new DelegateCommand(ExitApp);
             MainWindowLoadedCommand = new DelegateCommand(MainWindowLoaded);
-            
+            OpenAppFolderCommand = new DelegateCommand(()=> Process.Start(FileManager.Instance.WorkingFolder));
         }
 
         public MainWindowViewModel( IRegionManager regionManager) :this()
