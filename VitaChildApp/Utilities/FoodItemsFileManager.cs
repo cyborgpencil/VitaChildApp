@@ -20,7 +20,7 @@ namespace VitaChildApp.Utilities
         public void SaveFoodItemList(ObservableCollection<FoodItem> foodItemList)
         {
             XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<FoodItem>));
-            FileStream sWriter = new FileStream($"{FileManager.Instance.WorkingFolder}/Food Items.xml", FileMode.OpenOrCreate);
+            FileStream sWriter = new FileStream($"{FileManager.Instance.WorkingFolder}/Food Items.xml", FileMode.Create);
             xml.Serialize(sWriter, foodItemList);
             sWriter.Close();
         }

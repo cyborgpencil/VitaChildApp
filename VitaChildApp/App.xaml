@@ -1,8 +1,15 @@
 ﻿<Application x:Class="VitaChildApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:VitaChildApp">
+             xmlns:local="clr-namespace:VitaChildApp"
+             xmlns:m="clr-namespace:VitaChildApp.Models"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
+             
     <Application.Resources>
-         
+        <ObjectDataProvider x:Key="FoodTypesEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="m:FoodType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Application.Resources>
 </Application>

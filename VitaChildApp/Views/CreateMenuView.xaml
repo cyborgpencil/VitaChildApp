@@ -6,10 +6,16 @@
              xmlns:local="clr-namespace:VitaChildApp.Views"
              xmlns:Converters="clr-namespace:VitaChildApp.Converters"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:vm ="clr-namespace:VitaChildApp.ViewModels"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <Converters:EnumDescToString x:Key="EnumDescToString"/>
+    </UserControl.Resources>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -32,28 +38,38 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Background="Ivory" Margin="5" Width="400" HorizontalAlignment="Left">
-                    <TextBlock Text="{Binding Path=CurrentFoodListBind, Mode=TwoWay}" Margin="2"/>
-                    <ListView Width="390" Height="150" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Path=FullFoodItemsNamesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelFoodItemBind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding Path=WorkingFoodItemIndex}"/>
+                    <ListView Width="390" Height="150" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Path=CurrentFoodList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="ItemName" SelectedItem="{Binding Path=WorkingFoodItem, Mode=TwoWay}" SelectedIndex="{Binding Path=CurrentListIndex}"/>
                 </StackPanel>
                 <StackPanel>
                     <Button Content="ADD TO LIST" Width="100" Height="50" Margin="10,2,10,10" Background="LightSkyBlue" Command="{Binding Path=AddFoodItemCommand}"/>
                     <Button Content="REMOVE FROM LIST" Width="120" Height="50" Margin="10,2,10,10" Background="LightPink" Command="{Binding Path=DeleteFoodItemCommand}"/>
-                    <Button Content="SAVE FOOD LIST" Width="120" Height="50" Margin="10,2,10,10" Background="LightPink" Command="{Binding Path=SaveFoodItemCommand}"/>
+                    <Button Content="SAVE FOOD LIST" Width="120" Height="50" Margin="10,2,10,10" Background="LawnGreen" Command="{Binding Path=SaveFoodItemCommand}"/>
                 </StackPanel>
-                <StackPanel Background="Ivory" Margin="5" Width="430" HorizontalAlignment="Left">
-                    <TextBlock Text="Create, Edit and Remove Food Items:" Margin="2"/>
-                    <TextBox Width="400" HorizontalAlignment="Left" Margin="5" Text="{Binding Path=WorkingFoodItem.ItemName, Mode=TwoWay}" />
-                    <TextBlock Text="Ingredients:" Margin="5"/>
+                <StackPanel Background="Ivory" Margin="2" Width="430" HorizontalAlignment="Left">
+                    
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="Add/Save Ingredient" Width="120" HorizontalAlignment="Left" Margin="5" Command="{Binding Path=AddIngredientsCommand}"/>
+                        <Button Content="Clear Form" Command="{Binding Path=ClearFormCommand}" Width="100" Margin="5" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Create, Edit and Remove Food Items:" Margin="2"/>
                     </StackPanel>
-                    <TextBlock Text="Type Name of Ingredient to add:" Margin="2"/>
-                    <TextBox Margin="2" Text="{Binding Path=CurrentIngredientBind}"/>
-                    <TextBlock Text="Current Ingredient List:" Margin="2"/>
-                    <ComboBox IsEditable="True" SelectedIndex="{Binding Path=IndexCount}" Height="20" Margin="5" Background="LightGray" ItemsSource="{Binding Path=WorkingFoodItem.IngredientsList}"/>
+                    <TextBox  Margin="5" Text="{Binding Path=WorkingFoodItem.ItemName, Mode=TwoWay}" />
+                    <Separator Margin="1"/>
+                    <TextBlock Text="Ingredients:" Margin="1" FontSize="14" FontStyle="Oblique"/>
+                    <TextBlock Text="Type Name of Ingredient to add:" Margin="1"/>
+                    <TextBox Margin="1" Text="{Binding Path=CurrentIngredientBind}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Add/Save Ingredient" Margin="5" Command="{Binding Path=AddIngredientsCommand}"/>
+                        <Button Content="Delete Selected Ingedient" Margin="5" Command="{Binding Path=DeleteSelIngredientCommand}"/>
+                        <Button Content="Delete All Ingredients" Margin="5"/>
+                    </StackPanel>
+                    <TextBlock Text="Current Ingredient List:" Margin="1"/>
+                    <ListView SelectedIndex="{Binding Path=CurrentSelectedIngredient, Mode=TwoWay}" Height="40" Margin="1" Background="LightGray" ItemsSource="{Binding Path=WorkingFoodItem.IngredientsList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Separator Margin="5" Background="BlueViolet"/>
+                    <TextBlock Text="Food Type:" Margin="1"/>
+                    <ComboBox Height="20" Margin="1" Background="LightGray"  SelectedIndex="{Binding FoodtypeIndexBind, Mode=TwoWay, NotifyOnTargetUpdated=True}" SelectedItem="{Binding Path=WorkingFoodItem.FoodType, Mode=TwoWay}" ItemsSource="{Binding Mode=OneWay, Source={StaticResource FoodTypesEnum}}"/>
+                   
                 </StackPanel>
             </StackPanel>
-            <StackPanel Background="AliceBlue" Margin="5" Height="270" Width="200" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal" Background="AliceBlue" Margin="5" Height="70"  HorizontalAlignment="Center">
                 <TextBlock Text="Food Category:" Margin="5"/>
                 <StackPanel Orientation="Horizontal">
                 <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\drinks.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
