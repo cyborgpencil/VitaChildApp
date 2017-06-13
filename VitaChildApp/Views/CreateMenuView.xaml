@@ -59,10 +59,10 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Content="Add/Save Ingredient" Margin="5" Command="{Binding Path=AddIngredientsCommand}"/>
                         <Button Content="Delete Selected Ingedient" Margin="5" Command="{Binding Path=DeleteSelIngredientCommand}"/>
-                        <Button Content="Delete All Ingredients" Margin="5"/>
+                        <Button Content="Delete All Ingredients" Margin="5" Command="{Binding Path=DeleteAllIngredientsCommand}"/>
                     </StackPanel>
                     <TextBlock Text="Current Ingredient List:" Margin="1"/>
-                    <ListView SelectedIndex="{Binding Path=CurrentSelectedIngredient, Mode=TwoWay}" Height="40" Margin="1" Background="LightGray" ItemsSource="{Binding Path=WorkingFoodItem.IngredientsList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ListView SelectedItem="{Binding Path=SelectedIngredient, Mode=OneWay}" SelectedIndex="{Binding Path=SelectedIngredientIndex, Mode=TwoWay}" Height="40" Margin="1" Background="LightGray" ItemsSource="{Binding Path=WorkingFoodItem.IngredientsList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Separator Margin="5" Background="BlueViolet"/>
                     <TextBlock Text="Food Type:" Margin="1"/>
                     <ComboBox Height="20" Margin="1" Background="LightGray"  SelectedIndex="{Binding FoodtypeIndexBind, Mode=TwoWay, NotifyOnTargetUpdated=True}" SelectedItem="{Binding Path=WorkingFoodItem.FoodType, Mode=TwoWay}" ItemsSource="{Binding Mode=OneWay, Source={StaticResource FoodTypesEnum}}"/>

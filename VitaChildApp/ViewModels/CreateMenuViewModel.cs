@@ -76,7 +76,7 @@ namespace VitaChildApp.ViewModels
             set { SetProperty(ref _fullFoodItemsList, value); }
         }
         private int _currentSelectedIngredient;
-        public int CurrentSelectedIngredient
+        public int SelectedIngredientIndex
         {
             get { return _currentSelectedIngredient; }
             set { SetProperty(ref _currentSelectedIngredient, value); }
@@ -101,7 +101,19 @@ namespace VitaChildApp.ViewModels
             get { return _deleteSelIngredientCommand; }
             set { SetProperty(ref _deleteSelIngredientCommand, value); }
         }
-        
+        private DelegateCommand _deleteAllIngredientsCommand;
+        public DelegateCommand DeleteAllIngredientsCommand
+        {
+            get { return _deleteAllIngredientsCommand; }
+            set { SetProperty(ref _deleteAllIngredientsCommand, value); }
+        }
+        private string _selectedIngredient;
+        public string SelectedIngredient
+        {
+            get { return _selectedIngredient; }
+            set { SetProperty(ref _selectedIngredient, value); }
+        }
+
 
         // Binding items
         private string _selFoodItemBind;
@@ -167,7 +179,7 @@ namespace VitaChildApp.ViewModels
             AddFoodItemCommand = new DelegateCommand(AddFoodItem).ObservesProperty(()=> FullFoodItemsNamesList.Count);
             WorkingFoodItem = new FoodItem();
             CurrentFoodList = new ObservableCollection<FoodItem>();
-            CurrentSelectedIngredient = -1;
+            SelectedIngredientIndex = -1;
             for (int i = 0; i < CurrentFoodList.Count; i++)
             {
                 CurrentFoodList[i].IngredientsList = new ObservableCollection<string>(new List<string>());
@@ -182,7 +194,8 @@ namespace VitaChildApp.ViewModels
             DeleteFoodItemCommand = new DelegateCommand(DeleteFoodItem, CanDeleteFoodItem).ObservesProperty(() => WorkingFoodItem);
             SaveFoodItemCommand = new DelegateCommand(SaveFoodItem, CanSaveFoodItems).ObservesProperty(() => FullFoodItemsNamesList).ObservesProperty(()=> FullFoodItemsNamesList.Count);
             ClearFormCommand = new DelegateCommand(ClearForm);
-            DeleteSelIngredientCommand = new DelegateCommand(DeleteSelIngredient, CanDeleteSelIngredient).ObservesProperty(() => WorkingFoodItem.IngredientsList.Count);
+            DeleteSelIngredientCommand = new DelegateCommand(DeleteSelIngredient, CanDeleteSelIngredient).ObservesProperty(() => SelectedIngredientIndex);
+            DeleteAllIngredientsCommand = new DelegateCommand(DeleteAllIngredients, CanDeleteAllIngredients).ObservesProperty(() => WorkingFoodItem);
             // Load Current Food list from File
             CurrentFoodList = new FoodItemsFileManager().LoadFoodItems();
             if (CurrentFoodList != null)
@@ -199,9 +212,23 @@ namespace VitaChildApp.ViewModels
             CurrentListIndex = -1;
         }
 
+        private bool CanDeleteAllIngredients()
+        {
+            if (WorkingFoodItem.IngredientsList.Count > 0)
+                return true;
+            RaisePropertyChanged([])
+            else
+                return false;
+        }
+
+        private void DeleteAllIngredients()
+        {
+            WorkingFoodItem.IngredientsList.Clear();
+        }
+
         private bool CanDeleteSelIngredient()
         {
-            if (WorkingFoodItem.IngredientsList.Count <= 0)
+            if (SelectedIngredientIndex <= -1)
                 return false;
 
             return true;
@@ -209,7 +236,7 @@ namespace VitaChildApp.ViewModels
 
         private void DeleteSelIngredient()
         {
-            CurrentFoodList.RemoveAt(CurrentSelectedIngredient);
+            WorkingFoodItem.IngredientsList.RemoveAt(SelectedIngredientIndex);
         }
 
         private void ClearForm()
