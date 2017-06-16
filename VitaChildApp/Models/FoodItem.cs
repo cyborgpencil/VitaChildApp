@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Prism.Mvvm;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace VitaChildApp.Models
 {
@@ -31,8 +32,11 @@ namespace VitaChildApp.Models
         public string ItemName
         {
             get { return _itemName; }
-            set { SetProperty(ref _itemName, value); }
+            set {
+                SetProperty(ref _itemName, value);
+            }
         }
+
         private ObservableCollection<string> _ingredientsList;
         public ObservableCollection<string> IngredientsList
         {
@@ -44,6 +48,10 @@ namespace VitaChildApp.Models
         {
             get { return _foodType; }
             set { SetProperty(ref _foodType, value); }
+        }
+        public FoodItem()
+        {
+            IngredientsList = new ObservableCollection<string>(new List<string>());
         }
     }
 }

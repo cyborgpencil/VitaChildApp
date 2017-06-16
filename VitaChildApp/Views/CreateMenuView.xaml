@@ -38,7 +38,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Background="Ivory" Margin="5" Width="400" HorizontalAlignment="Left">
-                    <ListView Width="390" Height="150" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Path=CurrentFoodList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="ItemName" SelectedItem="{Binding Path=WorkingFoodItem, Mode=TwoWay}" SelectedIndex="{Binding Path=CurrentListIndex}"/>
+                    <ListView  Width="390" Height="150" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Path=CurrentFoodList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="ItemName" SelectedItem="{Binding Path=WorkingFoodItem, Mode=TwoWay}" SelectedIndex="{Binding Path=CurrentListIndex}"/>
                 </StackPanel>
                 <StackPanel>
                     <Button Content="ADD TO LIST" Width="100" Height="50" Margin="10,2,10,10" Background="LightSkyBlue" Command="{Binding Path=AddFoodItemCommand}"/>
@@ -51,7 +51,7 @@
                         <Button Content="Clear Form" Command="{Binding Path=ClearFormCommand}" Width="100" Margin="5" HorizontalAlignment="Left"/>
                         <TextBlock Text="Create, Edit and Remove Food Items:" Margin="2"/>
                     </StackPanel>
-                    <TextBox  Margin="5" Text="{Binding Path=WorkingFoodItem.ItemName, Mode=TwoWay}" />
+                    <TextBox Name="ItemName_txtBx"  Margin="5" Text="{Binding Path=WorkingFoodItem.ItemName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" />
                     <Separator Margin="1"/>
                     <TextBlock Text="Ingredients:" Margin="1" FontSize="14" FontStyle="Oblique"/>
                     <TextBlock Text="Type Name of Ingredient to add:" Margin="1"/>

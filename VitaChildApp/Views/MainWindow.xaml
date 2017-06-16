@@ -21,6 +21,9 @@
                 <Separator/>
                 <MenuItem Header="Exit" Command="{Binding Path=ExitAppCommand}" />
                 <MenuItem Header="Open Application Folder" Command="{Binding Path=OpenAppFolderCommand}" />
+                <MenuItem Header="Print">
+                    <MenuItem Header="Meal Planner" Command="{Binding Path=PrintMealCommand}"/>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <TabControl>

@@ -5,6 +5,10 @@ using System.Windows;
 using System.IO;
 using System.Diagnostics;
 using VitaChildApp.Utilities;
+using System;
+using System.Windows.Controls;
+using VitaChildApp.Views;
+using System.Windows.Documents;
 
 namespace VitaChildApp.ViewModels
 {
@@ -29,12 +33,29 @@ namespace VitaChildApp.ViewModels
             get { return _openAppFolderCommand; }
             set { SetProperty(ref _openAppFolderCommand, value); }
         }
+        private DelegateCommand _printMealCommand;
+        public DelegateCommand PrintMealCommand
+        {
+            get { return _printMealCommand; }
+            set { SetProperty(ref _printMealCommand, value); }
+        }
 
         public MainWindowViewModel()
         {
             ExitAppCommand = new DelegateCommand(ExitApp);
             MainWindowLoadedCommand = new DelegateCommand(MainWindowLoaded);
             OpenAppFolderCommand = new DelegateCommand(()=> Process.Start(FileManager.Instance.WorkingFolder));
+            PrintMealCommand = new DelegateCommand(PrintMeal);
+        }
+
+        private void PrintMeal()
+        {
+            // Print Dialog
+            PrintDialog printDlg = new PrintDialog();
+            FlowDocument MealPrint = new FlowDocument();
+            MealPrint.DataContext = App.Current.MainWindow.DataContext;
+            IDocumentPaginatorSource dpage = MealPrint;
+            printDlg.PrintDocument(dpage.DocumentPaginator, "Test");
         }
 
         public MainWindowViewModel( IRegionManager regionManager) :this()
