@@ -18,12 +18,11 @@ namespace VitaChildApp.Views
     /// <summary>
     /// Interaction logic for MealPlannerView.xaml
     /// </summary>
-    public partial class MealPlannerView : UserControl
+    public partial class MealPlannerBaseView : UserControl
     {
-        public MealPlannerView()
+        public MealPlannerBaseView()
         {
             InitializeComponent();
         }
-
     }
 }

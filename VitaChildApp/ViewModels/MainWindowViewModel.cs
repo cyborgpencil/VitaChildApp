@@ -76,7 +76,7 @@ namespace VitaChildApp.ViewModels
 
         private void MainWindowLoaded()
         {
-            Navigate("MealPlannerView");
+            Navigate("MealPlannerBaseView");
 
         }
     }

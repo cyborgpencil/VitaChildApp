@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace VitaChildApp.ViewModels
 {
-    public class CreateMenuViewModel : BindableBase
+    public class EditFoodItemViewModel : BindableBase
     {
         private bool _breakfastBindable;
         public bool BreakfastBindable
@@ -20,11 +20,11 @@ namespace VitaChildApp.ViewModels
             set { SetProperty(ref _breakfastBindable, value);
             }
         }
-        private DelegateCommand _createMenuLoadedCommand;
-        public DelegateCommand CreateMenuLoadedCommand
+        private DelegateCommand _editFoodItemLoadedCommand;
+        public DelegateCommand EditFoodItemLoadedCommand
         {
-            get { return _createMenuLoadedCommand; }
-            set { SetProperty(ref _createMenuLoadedCommand, value); }
+            get { return _editFoodItemLoadedCommand; }
+            set { SetProperty(ref _editFoodItemLoadedCommand, value); }
         }
         
         private DelegateCommand _addFoodItemCommand;
@@ -177,7 +177,7 @@ namespace VitaChildApp.ViewModels
             set { SetProperty(ref _selectedTypeBind, value); }
         }
 
-        public CreateMenuViewModel()
+        public EditFoodItemViewModel()
         {
             BreakfastBindable = true;
             WorkingFoodItem = new FoodItem();

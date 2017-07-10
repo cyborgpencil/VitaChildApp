@@ -1,57 +1,38 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
+﻿using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VitaChildApp.Models;
+using VitaChildApp.Utilities;
 
 namespace VitaChildApp.ViewModels
 {
     public class MealPlannerViewModel : BindableBase
     {
-        private readonly IRegionManager _regionManager;
-        private DelegateCommand _navigateHomeCommand;
-        public DelegateCommand NavigateHomeCommand
+
+        private MealPlan _currentMealPlan;
+        public MealPlan CurrentMealPlan
         {
-            get { return _navigateHomeCommand; }
-            set { SetProperty(ref _navigateHomeCommand, value); }
+            get { return _currentMealPlan; }
+            set { SetProperty(ref _currentMealPlan, value); }
         }
-        private DelegateCommand _mealPlannerLoaded;
-        public DelegateCommand MealPlannerLoaded
-        {
-            get { return _mealPlannerLoaded; }
-            set { SetProperty(ref _mealPlannerLoaded, value); }
-        }
-        private DelegateCommand _createMealCommand;
-        public DelegateCommand CreateMealCommand
-        {
-            get { return _createMealCommand; }
-            set { SetProperty(ref _createMealCommand, value); }
-        }
+
+
 
         public MealPlannerViewModel()
         {
-            NavigateHomeCommand = new DelegateCommand(NavigateToHome);
-            MealPlannerLoaded = new DelegateCommand(NavigateToHome);
-            CreateMealCommand = new DelegateCommand(NavigateToCreateMeal);
+            CurrentMealPlan = new MealPlan();
+            CurrentMealPlan.MealName = "Meal test";
+            CurrentMealPlan.FromDate = new DateTime(2017, 01, 01);
+            CurrentMealPlan.ToDate = CurrentMealPlan.FromDate.AddDays(6);
+
+            CurrentMealPlan.MealDay = new ObservableCollection<MealDay>();
+
+            
         }
 
-        public MealPlannerViewModel( IRegionManager regionManager) : this()
-        {
-            _regionManager = regionManager;
-        }
-
-        private void NavigateToCreateMeal()
-        {
-            // navigate to MealPlanner on load
-            Navigate("CreateMenuView");
-        }
-
-        private void NavigateToHome()
-        {
-           
-        }
-
-        private void Navigate(string uri)
-        {
-            _regionManager.RequestNavigate("MealMenuContent", uri);
-        }
     }
 }

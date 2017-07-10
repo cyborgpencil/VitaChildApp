@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="VitaChildApp.Views.MealView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VitaChildApp.Views"
+             xmlns:prism ="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <StackPanel Background="Azure">
+        <Label Content="CREATE A MEAL" Background="LightGray"/>
+        <Label Content="Choose a date: "/>
+        <DatePicker HorizontalAlignment="Center" Margin="5"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton Margin="5" Content="Breakfast" GroupName="mealTimes"/>
+            <RadioButton Margin="5" Content="AM Snack" GroupName="mealTimes"/>
+            <RadioButton Margin="5" Content="Lunch" GroupName="mealTimes"/>
+            <RadioButton Margin="5" Content="PM Snack" GroupName="mealTimes"/>
+            <RadioButton Margin="5" Content="Supper" GroupName="mealTimes"/>
+            <RadioButton Margin="5" Content="EV Snack" GroupName="mealTimes"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <Label Content="Add a Food Item:" Background="AliceBlue"/>
+            <ListBox Width="300" ItemsSource="{Binding Path=CurrentFoodItems}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=ItemName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Content="Add" Margin="2" Width="80"/>
+            <Button Content="Remove" Margin="2" Width="80"/>
+        </StackPanel>
+        <Label Content="Current Food Items:"/>
+        <ListView Height="100" Margin="2"/>
+        <Button Content="Save Meal" Width="100" HorizontalAlignment="Left" Margin="2"/>
+    </StackPanel>
+</UserControl>

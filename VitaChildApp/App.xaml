@@ -4,12 +4,16 @@
              xmlns:local="clr-namespace:VitaChildApp"
              xmlns:m="clr-namespace:VitaChildApp.Models"
              xmlns:sys="clr-namespace:System;assembly=mscorlib">
-             
+
     <Application.Resources>
-        <ObjectDataProvider x:Key="FoodTypesEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider x:Key="FoodTypesEnum" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="m:FoodType"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <DataTemplate x:Key="FoodItem">
+            
+        </DataTemplate>
     </Application.Resources>
 </Application>

@@ -4,26 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VitaChildApp.Views"
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1000">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding MealPlannerLoaded}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
-    
-    <StackPanel Background="Yellow">
-        <StackPanel>
-            <Calendar Width="200" HorizontalAlignment="Left" Margin="5" Height="30"/>
-            <Menu Height="40" Background="DarkGray" Margin="5">
-                <MenuItem Header="Home" Height="40" Margin="5" Background="Gray" Command="{Binding Path=HomeMealCommand}"/>
-                <MenuItem Header="Create Menu" Height="40" Margin="5" Background="Gray" Command="{Binding Path=CreateMealCommand}"/>
-                <MenuItem Header="Edit Food" Height="40" Margin="5" Background="Gray" Command="{Binding Path=EditMealCommand}"/>
-            </Menu>
-            <ContentControl prism:RegionManager.RegionName="MealMenuContent"/>
+             d:DesignHeight="900" d:DesignWidth="1000">
+    <StackPanel Background="White">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Planned Menu:" />
+            <TextBlock Text="{Binding Path=CurrentMealPlan.MealName}"/>
         </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="From: " Margin="10,2"/>
+            <DatePicker SelectedDate="{Binding CurrentMealPlane.FromDate}" />
+            <Label Content="To:" Margin="10,2"/>
+            <TextBlock Text="{Binding Path=CurrentMealPlan.ToDate}" Margin="10,2"/>
+        </StackPanel>
+        <ListView >
+            <GridView>
+                <GridViewColumn Header="Breakfast"/>
+                <GridViewColumn Header="AM Snack"/>
+                <GridViewColumn Header="Lunch"/>
+                <GridViewColumn Header="PM Snack"/>
+                <GridViewColumn Header="Supper"/>
+                <GridViewColumn Header="EV Snacks"/>
+            </GridView>
+        </ListView>
     </StackPanel>
 </UserControl>

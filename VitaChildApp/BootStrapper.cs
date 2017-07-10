@@ -21,8 +21,10 @@ namespace VitaChildApp
         {
             base.ConfigureContainer();
 
+            Container.RegisterTypeForNavigation<MealPlannerBaseView>();
+            Container.RegisterTypeForNavigation<EditFoodItemView>();
+            Container.RegisterTypeForNavigation<MealView>();
             Container.RegisterTypeForNavigation<MealPlannerView>();
-            Container.RegisterTypeForNavigation<CreateMenuView>();
         }
     }
 }

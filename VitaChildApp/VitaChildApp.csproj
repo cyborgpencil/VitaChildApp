@@ -88,18 +88,30 @@
     <Compile Include="Converters\EnumDescToString.cs" />
     <Compile Include="Converters\FoodItemToStringConverter.cs" />
     <Compile Include="Models\FoodItem.cs" />
+    <Compile Include="Models\Meal.cs" />
+    <Compile Include="Models\MealDay.cs" />
+    <Compile Include="Models\MealPlan.cs" />
+    <Compile Include="Models\MealTimes.cs" />
     <Compile Include="Utilities\FileManager.cs" />
     <Compile Include="Utilities\FoodItemsFileManager.cs" />
-    <Compile Include="ViewModels\CreateMenuViewModel.cs" />
+    <Compile Include="ViewModels\EditFoodItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MealPlannerBaseViewModel.cs" />
     <Compile Include="ViewModels\MealPlannerViewModel.cs" />
-    <Compile Include="Views\CreateMenuView.xaml.cs">
-      <DependentUpon>CreateMenuView.xaml</DependentUpon>
+    <Compile Include="ViewModels\MealViewModel.cs" />
+    <Compile Include="Views\EditFoodItemView.xaml.cs">
+      <DependentUpon>EditFoodItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MealPlannerBaseView.xaml.cs">
+      <DependentUpon>MealPlannerBaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MealPlannerView.xaml.cs">
       <DependentUpon>MealPlannerView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\CreateMenuView.xaml">
+    <Compile Include="Views\MealView.xaml.cs">
+      <DependentUpon>MealView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\EditFoodItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,7 +128,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MealPlannerBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MealPlannerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MealView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

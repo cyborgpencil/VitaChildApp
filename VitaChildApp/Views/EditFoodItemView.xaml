@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="VitaChildApp.Views.CreateMenuView"
+﻿<UserControl x:Class="VitaChildApp.Views.EditFoodItemView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -19,23 +19,12 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding CreateMenuLoadedCommand}" />
+            <i:InvokeCommandAction Command="{Binding EditFoodItemLoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <StackPanel Background="Gray">
         <StackPanel>
-            <TextBlock Text="Age Group" Margin="5"/>
-            <ComboBox Width="700" Height="15" HorizontalAlignment="Left">
-            </ComboBox>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton Content="Breakfast" Margin="5" IsChecked="{Binding Path=BreakfastBindable, Mode=TwoWay}"/>
-                <RadioButton Content="Snack" Margin="5"/>
-                <RadioButton Content="Lunch/Supper" Margin="5"/>
-            </StackPanel>
-            <StackPanel Background="LightGray" Margin="2">
-                <TextBlock Margin="2" Text="Current Meal:"/>
-                <TextBox Margin="2" Width="500" HorizontalAlignment="Left"/>
-            </StackPanel>
+            <TextBlock Text="Edit Food Item" FontSize="30" Background="AntiqueWhite"/>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Background="Ivory" Margin="5" Width="400" HorizontalAlignment="Left">
                     <ListView  Width="390" Height="150" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Path=CurrentFoodList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="ItemName" SelectedItem="{Binding Path=WorkingFoodItem, Mode=TwoWay}" SelectedIndex="{Binding Path=CurrentListIndex}"/>

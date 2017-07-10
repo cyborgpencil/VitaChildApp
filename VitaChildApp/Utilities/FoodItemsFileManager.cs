@@ -9,6 +9,7 @@ namespace VitaChildApp.Utilities
     public class FoodItemsFileManager
     {
         private FoodItem _foodItem { get; set; }
+        
         public void SaveFoodItem(FoodItem foodItem)
         {
             XmlSerializer xml = new XmlSerializer(typeof(FoodItem));

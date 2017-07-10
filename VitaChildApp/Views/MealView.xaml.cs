@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace VitaChildApp.Views
 {
     /// <summary>
-    /// Interaction logic for CreateMenuView.xaml
+    /// Interaction logic for MealView.xaml
     /// </summary>
-    public partial class CreateMenuView : UserControl
+    public partial class MealView : UserControl
     {
-        public CreateMenuView()
+        public MealView()
         {
             InitializeComponent();
         }
