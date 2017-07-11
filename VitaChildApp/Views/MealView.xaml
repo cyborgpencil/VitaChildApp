@@ -10,30 +10,28 @@
              d:DesignHeight="600" d:DesignWidth="800">
     <StackPanel Background="Azure">
         <Label Content="CREATE A MEAL" Background="LightGray"/>
-        <Label Content="Choose a date: "/>
-        <DatePicker HorizontalAlignment="Center" Margin="5"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <RadioButton Margin="5" Content="Breakfast" GroupName="mealTimes"/>
-            <RadioButton Margin="5" Content="AM Snack" GroupName="mealTimes"/>
-            <RadioButton Margin="5" Content="Lunch" GroupName="mealTimes"/>
-            <RadioButton Margin="5" Content="PM Snack" GroupName="mealTimes"/>
-            <RadioButton Margin="5" Content="Supper" GroupName="mealTimes"/>
-            <RadioButton Margin="5" Content="EV Snack" GroupName="mealTimes"/>
-        </StackPanel>
+        <Label Content="Meal Time:"/>
+        <ComboBox ItemsSource="{Binding Mode=OneWay, Source={StaticResource MealTimesEnum}}" Margin="5"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <Label Content="Add a Food Item:" Background="AliceBlue"/>
-            <ListBox Width="300" ItemsSource="{Binding Path=CurrentFoodItems}">
+            <ListBox Width="300" ItemsSource="{Binding Path=CurrentFoodItems}" SelectedItem="{Binding SelectedFoodItem}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=ItemName}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Content="Add" Margin="2" Width="80"/>
+            <Button Content="Add" Margin="2" Width="80" Command="{Binding AddFoodItemCommand}"/>
             <Button Content="Remove" Margin="2" Width="80"/>
         </StackPanel>
         <Label Content="Current Food Items:"/>
-        <ListView Height="100" Margin="2"/>
+        <ListView Height="100" Margin="2" ItemsSource="{Binding Path=CurrentMeal.FoodItemList, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=ItemName}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Button Content="Save Meal" Width="100" HorizontalAlignment="Left" Margin="2"/>
     </StackPanel>
 </UserControl>

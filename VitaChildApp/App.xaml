@@ -12,8 +12,11 @@
                 <x:Type TypeName="m:FoodType"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
-        <DataTemplate x:Key="FoodItem">
-            
-        </DataTemplate>
+        <ObjectDataProvider x:Key="MealTimesEnum" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="m:MealTimes"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Application.Resources>
 </Application>
