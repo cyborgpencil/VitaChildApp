@@ -29,7 +29,7 @@ namespace VitaChildApp.ViewModels
             CurrentMealPlan.FromDate = new DateTime(2017, 01, 01);
             CurrentMealPlan.ToDate = CurrentMealPlan.FromDate.AddDays(6);
 
-            CurrentMealPlan.MealDay = new ObservableCollection<MealDay>();
+            CurrentMealPlan.MealDay = new ObservableCollection<MealDay>(new List<MealDay>());
 
             
         }

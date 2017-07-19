@@ -7,7 +7,6 @@ namespace VitaChildApp.Utilities
     {
         private static FileManager instance;
         public string WorkingFolder;
-        
 
         private FileManager()
         {

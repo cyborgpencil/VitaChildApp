@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VitaChildApp.Views"
+             xmlns:m="clr-namespace:VitaChildApp.Models"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -15,19 +16,24 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="From: " Margin="10,2"/>
-            <DatePicker SelectedDate="{Binding CurrentMealPlane.FromDate}" />
+            <DatePicker SelectedDate="{Binding CurrentMealPlan.FromDate}" />
             <Label Content="To:" Margin="10,2"/>
             <TextBlock Text="{Binding Path=CurrentMealPlan.ToDate}" Margin="10,2"/>
         </StackPanel>
-        <ListView >
-            <GridView>
-                <GridViewColumn Header="Breakfast"/>
-                <GridViewColumn Header="AM Snack"/>
-                <GridViewColumn Header="Lunch"/>
-                <GridViewColumn Header="PM Snack"/>
-                <GridViewColumn Header="Supper"/>
-                <GridViewColumn Header="EV Snacks"/>
-            </GridView>
+        <ListView ItemsSource="{Binding Source=CurrentMealPlan, Path=MealDay}">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type m:MealDay}"/>
+            </ListView.ItemTemplate>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Breakfast"/>
+                    <GridViewColumn Header="AM Snack"/>
+                    <GridViewColumn Header="Lunch"/>
+                    <GridViewColumn Header="PM Snack"/>
+                    <GridViewColumn Header="Supper"/>
+                    <GridViewColumn Header="EV Snacks"/>
+                </GridView>
+            </ListView.View>
         </ListView>
     </StackPanel>
 </UserControl>
