@@ -25,6 +25,8 @@ namespace VitaChildApp
             Container.RegisterTypeForNavigation<EditFoodItemView>();
             Container.RegisterTypeForNavigation<MealView>();
             Container.RegisterTypeForNavigation<MealPlannerView>();
+            Container.RegisterTypeForNavigation<MealDayView>();
+            Container.RegisterTypeForNavigation<MealPlannerCalendarView>();
         }
     }
 }

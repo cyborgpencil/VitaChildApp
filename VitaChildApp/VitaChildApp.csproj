@@ -103,11 +103,14 @@
     <Compile Include="Views\EditFoodItemView.xaml.cs">
       <DependentUpon>EditFoodItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MealDayView.xaml.cs">
+      <DependentUpon>MealDayView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MealPlannerBaseView.xaml.cs">
       <DependentUpon>MealPlannerBaseView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MealPlannerCalndarView.xaml.cs">
-      <DependentUpon>MealPlannerCalndarView.xaml</DependentUpon>
+    <Compile Include="Views\MealPlannerCalendarView.xaml.cs">
+      <DependentUpon>MealPlannerCalendarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MealPlannerView.xaml.cs">
       <DependentUpon>MealPlannerView.xaml</DependentUpon>
@@ -132,11 +135,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MealDayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MealPlannerBaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MealPlannerCalndarView.xaml">
+    <Page Include="Views\MealPlannerCalendarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace VitaChildApp.Views
 {
     /// <summary>
-    /// Interaction logic for MealPlannerCalndarView.xaml
+    /// Interaction logic for MealDayView.xaml
     /// </summary>
-    public partial class MealPlannerCalndarView : UserControl
+    public partial class MealDayView : UserControl
     {
-        public MealPlannerCalndarView()
+        public MealDayView()
         {
             InitializeComponent();
         }

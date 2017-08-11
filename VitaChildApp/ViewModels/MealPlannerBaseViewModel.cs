@@ -37,6 +37,12 @@ namespace VitaChildApp.ViewModels
             get { return _homeMealCommand; }
             set { SetProperty(ref _homeMealCommand, value); }
         }
+        private DelegateCommand _editADayCommand;
+        public DelegateCommand EditADayCommand
+        {
+            get { return _editADayCommand; }
+            set { SetProperty(ref _editADayCommand, value); }
+        }
 
         public MealPlannerBaseViewModel()
         {
@@ -45,11 +51,18 @@ namespace VitaChildApp.ViewModels
             EditFoodItemCommand = new DelegateCommand(NavigateToEditFoodItem);
             EditMealCommand = new DelegateCommand(NavigateToEditMeal);
             HomeMealCommand = new DelegateCommand(NavigateToMealPlanner);
+            EditADayCommand = new DelegateCommand(NavigateToMealDay);
         }
 
         public MealPlannerBaseViewModel( IRegionManager regionManager) : this()
         {
             _regionManager = regionManager;
+        }
+
+        private void NavigateToMealDay()
+        {
+            // navigate to MealPlanner on load
+            Navigate("MealDayView");
         }
 
         private void NavigateToEditFoodItem()
@@ -65,7 +78,7 @@ namespace VitaChildApp.ViewModels
 
         private void NavigateToMealPlanner()
         {
-            Navigate("MealPlannerView");
+            Navigate("MealPlannerCalendarView");
         }
 
         private void Navigate(string uri)

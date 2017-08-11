@@ -15,11 +15,12 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     
-    <StackPanel Background="Yellow">
+    <StackPanel Background="LightYellow">
         <StackPanel>
             <Menu Height="40" Background="DarkGray" Margin="5">
                 <MenuItem Header="Home" Height="40" Margin="5" Background="Gray" Command="{Binding Path=HomeMealCommand}"/>
                 <MenuItem Header="Edit Meal Menu" Height="40" Margin="5" Background="Gray" Command="{Binding Path=EditMealCommand}"/>
+                <MenuItem Header="Edit Meals for a Day" Height="40" Margin="5" Background="Gray" Command="{Binding Path=EditADayCommand}"/>
                 <MenuItem Header="Edit Food Item Menu" Height="40" Margin="5" Background="Gray" Command="{Binding Path=EditFoodItemCommand}"/>
             </Menu>
             <ContentControl prism:RegionManager.RegionName="MealMenuContent"/>
