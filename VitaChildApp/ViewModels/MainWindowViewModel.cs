@@ -44,7 +44,6 @@ namespace VitaChildApp.ViewModels
         {
             ExitAppCommand = new DelegateCommand(ExitApp);
             MainWindowLoadedCommand = new DelegateCommand(MainWindowLoaded);
-            OpenAppFolderCommand = new DelegateCommand(()=> Process.Start(FileManager.Instance.WorkingFolder));
             PrintMealCommand = new DelegateCommand(PrintMeal);
         }
 

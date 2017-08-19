@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -8,44 +10,68 @@ namespace VitaChildApp.Utilities
 {
     public class FoodItemsFileManager
     {
-        private FoodItem _foodItem { get; set; }
-        
-        public void SaveFoodItem(FoodItem foodItem)
+        private static FoodItemsFileManager _instance;
+        private static readonly object padlock = new object();
+
+        // filename for all food items
+        private string _foodItemListFileName;
+
+        // this is the global Food Item List
+        private List<FoodItem> LoadedFoodtemList { get; set; }
+
+        private FoodItemsFileManager()
         {
-            XmlSerializer xml = new XmlSerializer(typeof(FoodItem));
-            TextWriter tWriter = new StreamWriter($"{FileManager.Instance.WorkingFolder}/Food Items.xml");
-            xml.Serialize(tWriter, foodItem);
-            tWriter.Close();
+            _foodItemListFileName = "Food Items.xml";
         }
 
-        public void SaveFoodItemList(ObservableCollection<FoodItem> foodItemList)
+        public static FoodItemsFileManager Instance
         {
-            XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<FoodItem>));
-            FileStream sWriter = new FileStream($"{FileManager.Instance.WorkingFolder}/Food Items.xml", FileMode.Create);
-            xml.Serialize(sWriter, foodItemList);
-            sWriter.Close();
-        }
-
-        public ObservableCollection<FoodItem> LoadFoodItems()
-        {
-            XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<FoodItem>));
-            var FoodItemLists = new ObservableCollection<FoodItem>();
-            if (File.Exists($"{FileManager.Instance.WorkingFolder}/Food Items.xml"))
+            get
             {
-                FileStream sWriter = new FileStream($"{FileManager.Instance.WorkingFolder}/Food Items.xml", FileMode.Open);
-                XmlReader reader = XmlReader.Create(sWriter);
-
-                
-                foreach (var ing in FoodItemLists)
+                if(_instance == null)
                 {
-                    ing.IngredientsList = new ObservableCollection<string>();
+                    lock(padlock)
+                    {
+                        _instance = new FoodItemsFileManager();
+                    }
                 }
-
-                FoodItemLists = (ObservableCollection<FoodItem>)xml.Deserialize(reader);
-                sWriter.Close();
+                return _instance;
             }
+        }
 
-            return FoodItemLists;
+        private void LoadFoodItemsFromFile()
+        {
+            XmlSerializer xmlSerial = new XmlSerializer(typeof(List<FoodItem>));
+
+            using (FileStream fileStream = new FileStream($"{FileManager.Instance.FoodItemsDir}\\{_foodItemListFileName}", FileMode.Open))
+            {
+                LoadedFoodtemList = new List<FoodItem>();
+                LoadedFoodtemList = (List<FoodItem>)xmlSerial.Deserialize(fileStream);
+            }
+        }
+
+        public List<FoodItem> GetFoodItemList()
+        {
+            // Load list from File
+            LoadFoodItemsFromFile();
+
+            // return current List
+            return LoadedFoodtemList;
+        }
+
+        public void SaveCurrentFoodItemList(FoodItem foodItem)
+        {
+            // Screate xml Serializer type of FoodItem
+            XmlSerializer xmlSaveSerial = new XmlSerializer(typeof(List<FoodItem>));
+
+            using (FileStream fileStream = new FileStream($"{FileManager.Instance.FoodItemsDir}\\{_foodItemListFileName}", FileMode.Open))
+            {
+                // add food item to list
+                LoadedFoodtemList.Add(foodItem);
+
+                // save list
+                xmlSaveSerial.Serialize(fileStream, LoadedFoodtemList);
+            }
         }
     }
 }

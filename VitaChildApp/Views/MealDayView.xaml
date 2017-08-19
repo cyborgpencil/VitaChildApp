@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VitaChildApp.Views"
+             xmlns:priasm="http://prismlibrary.com/"
+             priasm:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid>
@@ -44,7 +46,7 @@
             <ListView Margin="2" Height="40" Background="LightGray"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="2" Orientation="Horizontal">
-            <Button  Content="Add Food Item" Margin="2" MinHeight="10"/>
+            <Button Content="Add Food Item" Margin="2" MinHeight="10"/>
             <Button  Content="Remove Item" Margin="2" MinHeight="10"/>
             <ListView MinHeight="20" MinWidth="500" Margin="2"/>
         </StackPanel>

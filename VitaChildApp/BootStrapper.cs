@@ -2,6 +2,7 @@
 using System.Windows;
 using Microsoft.Practices.Unity;
 using VitaChildApp.Views;
+using VitaChildApp.Utilities;
 
 namespace VitaChildApp
 {
@@ -28,5 +29,6 @@ namespace VitaChildApp
             Container.RegisterTypeForNavigation<MealDayView>();
             Container.RegisterTypeForNavigation<MealPlannerCalendarView>();
         }
+
     }
 }

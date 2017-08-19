@@ -38,8 +38,8 @@ namespace VitaChildApp.ViewModels
         public MealViewModel()
         {
             // Load foodItems
-            FoodItemsFileManager FiM = new FoodItemsFileManager();
-            CurrentFoodItems = FiM.LoadFoodItems();
+            //FoodItemsFileManager FiM = new FoodItemsFileManager();
+            //CurrentFoodItems = FiM.LoadFoodItems();
 
             CurrentMeal = new Meal();
             CurrentMeal.FoodItemList = new ObservableCollection<FoodItem>();

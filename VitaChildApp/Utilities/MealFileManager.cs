@@ -20,8 +20,7 @@ namespace VitaChildApp.Utilities
 
         private MealFileManager()
         {
-            MealFileName = @"Meals.xml";
-            MealFileNameFull = $"{FileManager.Instance.WorkingFolder}\\{MealFileName}";
+
 
             if (!File.Exists(MealFileNameFull))
             {

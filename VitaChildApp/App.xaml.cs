@@ -15,8 +15,7 @@ namespace VitaChildApp
             bs.Run();
 
             // File Management
-            FileManager.Instance.CreateWorkingFolders();
-
+            FileManager.Instance.SetupAndVerifyFolders();
         }
     }
 }

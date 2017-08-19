@@ -200,16 +200,10 @@ namespace VitaChildApp.ViewModels
             ClearFormCommand = new DelegateCommand(ClearForm);
             DeleteSelIngredientCommand = new DelegateCommand(DeleteSelIngredient, CanDeleteSelIngredient).ObservesProperty(() => SelectedIngredientIndex);
             DeleteAllIngredientsCommand = new DelegateCommand(DeleteAllIngredients, CanDeleteAllIngredients);
-            
-            // Load Current Food list from File
-            CurrentFoodList = new FoodItemsFileManager().LoadFoodItems();
-            if (CurrentFoodList != null)
-            {
-                for (int i = 0; i < CurrentFoodList.Count; i++)
-                {
-                    FullFoodItemsNamesList.Add(CurrentFoodList[i].ItemName);
-                }
-            }
+
+            // Get Food List
+            CurrentFoodList = new ObservableCollection<FoodItem>( FoodItemsFileManager.Instance.GetFoodItemList());
+
 
             FoodType = new FoodType();
             FoodTypesToString = new ObservableCollection<string>(new List<string>(Enum.GetNames(typeof(FoodType))));
@@ -291,9 +285,11 @@ namespace VitaChildApp.ViewModels
         private void SaveFoodItem()
         {
 
-            FoodItemsFileManager fiFM = new FoodItemsFileManager();
+            // Save Food Item to File
+            FoodItemsFileManager.Instance.SaveCurrentFoodItemList(WorkingFoodItem);
 
-            fiFM.SaveFoodItemList(CurrentFoodList);
+            //Update List
+            CurrentFoodList = new ObservableCollection<FoodItem>(FoodItemsFileManager.Instance.GetFoodItemList());
 
             CurrentFoodListBind = "Current Food List:";
         }
@@ -340,6 +336,9 @@ namespace VitaChildApp.ViewModels
             // verify Food Item has a Name
             if (!string.IsNullOrWhiteSpace(WorkingFoodItem.ItemName))
             {
+                // Check for blank Ingredients
+                if (WorkingFoodItem.IngredientsList == null)
+                    WorkingFoodItem.IngredientsList = new ObservableCollection<string>();
                 //Check For Update
                 if(CurrentListIndex != -1)
                 {
