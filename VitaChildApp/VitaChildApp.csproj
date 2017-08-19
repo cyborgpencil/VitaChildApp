@@ -94,6 +94,7 @@
     <Compile Include="Models\MealTimes.cs" />
     <Compile Include="Utilities\FileManager.cs" />
     <Compile Include="Utilities\FoodItemsFileManager.cs" />
+    <Compile Include="Utilities\MealDayFileManager.cs" />
     <Compile Include="Utilities\MealFileManager.cs" />
     <Compile Include="ViewModels\EditFoodItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

@@ -7,6 +7,7 @@ using VitaChildApp.Models;
 using VitaChildApp.Utilities;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using System.Diagnostics;
 
 namespace VitaChildApp.ViewModels
@@ -286,7 +287,7 @@ namespace VitaChildApp.ViewModels
         {
 
             // Save Food Item to File
-            FoodItemsFileManager.Instance.SaveCurrentFoodItemList(WorkingFoodItem);
+            FoodItemsFileManager.Instance.SaveCurrentFoodItemList(CurrentFoodList.ToList());
 
             //Update List
             CurrentFoodList = new ObservableCollection<FoodItem>(FoodItemsFileManager.Instance.GetFoodItemList());

@@ -22,6 +22,8 @@ namespace VitaChildApp.Utilities
         private FoodItemsFileManager()
         {
             _foodItemListFileName = "Food Items.xml";
+
+            VerifyFile();
         }
 
         public static FoodItemsFileManager Instance
@@ -59,18 +61,26 @@ namespace VitaChildApp.Utilities
             return LoadedFoodtemList;
         }
 
-        public void SaveCurrentFoodItemList(FoodItem foodItem)
+        public void SaveCurrentFoodItemList(List<FoodItem> foodItemList)
         {
             // Screate xml Serializer type of FoodItem
             XmlSerializer xmlSaveSerial = new XmlSerializer(typeof(List<FoodItem>));
 
-            using (FileStream fileStream = new FileStream($"{FileManager.Instance.FoodItemsDir}\\{_foodItemListFileName}", FileMode.Open))
+            using (FileStream fileStream = new FileStream($"{FileManager.Instance.FoodItemsDir}\\{_foodItemListFileName}", FileMode.Create))
             {
                 // add food item to list
-                LoadedFoodtemList.Add(foodItem);
+                LoadedFoodtemList = foodItemList;
 
                 // save list
                 xmlSaveSerial.Serialize(fileStream, LoadedFoodtemList);
+            }
+        }
+
+        private void VerifyFile()
+        {
+            if(!File.Exists($"{FileManager.Instance.FoodItemsDir}\\{_foodItemListFileName}"))
+            {
+                File.Create($"{FileManager.Instance.FoodItemsDir}\\{_foodItemListFileName}");
             }
         }
     }
