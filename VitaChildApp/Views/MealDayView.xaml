@@ -25,35 +25,77 @@
             <ColumnDefinition Width="83*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="70"/>
+            <RowDefinition MinHeight="30"/>
             <RowDefinition MinHeight="80"/>
-            <RowDefinition MinHeight="70"/>
-            <RowDefinition MinHeight="70"/>
-            <RowDefinition MinHeight="70"/>
-            <RowDefinition MinHeight="70"/>
-            <RowDefinition MinHeight="70"/>
-            <RowDefinition MinHeight="70"/>
-            <RowDefinition MinHeight="70"/>
+            <RowDefinition MinHeight="50"/>
+            <RowDefinition MinHeight="50"/>
+            <RowDefinition MinHeight="50"/>
+            <RowDefinition MinHeight="50"/>
+            <RowDefinition MinHeight="50"/>
+            <RowDefinition MinHeight="50"/>
+            <RowDefinition MinHeight="50"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="EDIT MEALS FOR THE DAY" FontSize="30" TextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
-        <StackPanel>
-            <TextBlock Text="Date:" Grid.Column="0" Grid.Row="0"/>
-            <DatePicker/>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="Date:" />
+            <DatePicker SelectedDate="{Binding SelectedDate}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Button Content="Save" Margin="5"/>
+            <Button Content="Delete" Margin="5"/>
         </StackPanel>
         
 <!-- MEAL TIMES-->
-        <TextBlock Text="BREAKFAST" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <TextBlock Text="AM SNACK" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <TextBlock Text="LUNCH" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <TextBlock Text="PM SNACK" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <TextBlock Text="SUPPER" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <TextBlock Text="EV SNACK" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <TextBlock Text="BREAKFAST" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <TextBlock Text="AM SNACK" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <TextBlock Text="LUNCH" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <TextBlock Text="PM SNACK" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <TextBlock Text="SUPPER" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <TextBlock Text="EV SNACK" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
 
         <!-- FOOD ITEMS -->
-        <StackPanel Grid.Row="1" Grid.Column="1" >
-            <Label Content="Select Food Items to add to meal" Margin="2" />
-            <ListView ItemsSource="{Binding Path=CurrentFoodList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" Height="60" Background="LightGray">
+        <StackPanel Grid.Column="1" Grid.Row="1">
+                <StackPanel Orientation="Horizontal" >
+                    <Label Content="Select Food Items to add to meal" Margin="2" />
+                    <TextBlock Text="Search" Margin="10,0,0,0"/>
+                    <TextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Background="AliceBlue" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\drinks.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
+                        <CheckBox IsChecked="{Binding FluidChecked}"/>
+                        <TextBlock Text="Liquids" Margin="5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\meatpng.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
+                        <CheckBox IsChecked="{Binding MeatAltChecked}"/>
+                        <TextBlock Text="Meat/Other" Margin="5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\veggies.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
+                        <CheckBox IsChecked="{Binding VeggieChecked}"/>
+                        <TextBlock Text="Vegetables" Margin="5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\bread.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
+                        <CheckBox IsChecked="{Binding BreadGrainsChecked}"/>
+                        <TextBlock Text="Breads/Grains" Margin="5"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <ListView Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=CurrentFoodList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedFoodItem}" Margin="2" Height="40" Background="LightGray">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ItemName}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        <StackPanel Grid.Column="1" Grid.Row="3" Margin="2" Orientation="Horizontal">
+            <Button Content="Add Food Item" Margin="2" MinHeight="10" Command="{Binding AddBreakfastCommand}" />
+            <Button  Content="Remove Item" Margin="2" MinHeight="10" Command="{Binding RemoveBreakfastListCommand}"/>
+            <ListView ItemsSource="{Binding BreakfastList}" SelectedItem="{Binding SelectedBreakfastItem}" SelectedIndex="{Binding BreakfastSelIndex}" Height="40" Width="500" Margin="2">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding ItemName}"/>
@@ -61,35 +103,60 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="2" Margin="2" Orientation="Horizontal">
-            <Button Content="Add Food Item" Margin="2" MinHeight="10"/>
-            <Button  Content="Remove Item" Margin="2" MinHeight="10"/>
-            <ListView MinHeight="20" MinWidth="500" Margin="2"/>
-        </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="3" Margin="2" Orientation="Horizontal">
-            <Button  Content="Add Food Item" Margin="2" MinHeight="10"/>
-            <Button  Content="Remove Item" Margin="2" MinHeight="10"/>
-            <ListView MinHeight="20" MinWidth="500" Margin="2"/>
-        </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="4" Margin="2" Orientation="Horizontal">
-            <Button  Content="Add Food Item" Margin="2" MinHeight="10"/>
-            <Button  Content="Remove Item" Margin="2" MinHeight="10"/>
-            <ListView MinHeight="20" MinWidth="500" Margin="2"/>
+            <Button Command="{Binding AddAMSnackCommand}"  Content="Add Food Item" Margin="2" MinHeight="10"/>
+            <Button Command="{Binding RemoveAMSnackCommand}" Content="Remove Item" Margin="2" MinHeight="10"/>
+            <ListView ItemsSource="{Binding AM_SnackList}" SelectedItem="{Binding SelectedAMSnack}" SelectedIndex="{Binding SelectedAMSnackIndex}" MinHeight="20" MinWidth="500" Margin="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ItemName}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Margin="2" Orientation="Horizontal">
-            <Button  Content="Add Food Item" Margin="2" MinHeight="10"/>
-            <Button  Content="Remove Item" Margin="2" MinHeight="10"/>
-            <ListView MinHeight="20" MinWidth="500" Margin="2"/>
+            <Button Command="{Binding AddLunchItemCommand}"  Content="Add Food Item" Margin="2" MinHeight="10"/>
+            <Button Command="{Binding RemoveLunchItemCommand}"  Content="Remove Item" Margin="2" MinHeight="10"/>
+            <ListView ItemsSource="{Binding LunchList}" SelectedItem="{Binding SelectedLunchItem}" SelectedIndex="{Binding SelectedLunchIndex}" MinHeight="20" MinWidth="500" Margin="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ItemName}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="6" Margin="2" Orientation="Horizontal">
-            <Button  Content="Add Food Item" Margin="2" MinHeight="10"/>
-            <Button  Content="Remove Item" Margin="2" MinHeight="10"/>
-            <ListView MinHeight="20" MinWidth="500" Margin="2"/>
+            <Button Command="{Binding AddPM_SnackItemCommand}"  Content="Add Food Item" Margin="2" MinHeight="10"/>
+            <Button Command="{Binding RemovePM_SnackItemCommand}"  Content="Remove Item" Margin="2" MinHeight="10"/>
+            <ListView ItemsSource="{Binding PM_SnackList}" SelectedItem="{ Binding SelectedPM_SnackItem}" SelectedIndex="{Binding SelectedPM_SnackIndex}" MinHeight="20" MinWidth="500" Margin="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ItemName}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="7" Margin="2" Orientation="Horizontal">
-            <Button  Content="Add Food Item" Margin="2" MinHeight="10"/>
-            <Button  Content="Remove Item" Margin="2" MinHeight="10"/>
-            <ListView MinHeight="20" MinWidth="500" Margin="2"/>
+            <Button Command="{Binding AddSupperItemCommand}"  Content="Add Food Item" Margin="2" MinHeight="10"/>
+            <Button Command="{Binding RemoveSupperItemCommand}"  Content="Remove Item" Margin="2" MinHeight="10"/>
+            <ListView ItemsSource="{Binding SupperList}" SelectedItem="{Binding SelectedSupperItem}" SelectedIndex="{Binding SelectedSupperIndex}" MinHeight="20" MinWidth="500" Margin="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ItemName}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="8" Margin="2" Orientation="Horizontal">
+            <Button Command="{Binding AddEV_SnackItemCommand}"  Content="Add Food Item" Margin="2" MinHeight="10"/>
+            <Button Command="{Binding RemoveEV_SnackItemCommand}"  Content="Remove Item" Margin="2" MinHeight="10"/>
+            <ListView ItemsSource="{Binding EV_SnackList}" SelectedItem="{Binding SelectedEV_SnackItem}" SelectedIndex="{Binding SelectedEV_SnackIndex}" MinHeight="20" MinWidth="500" Margin="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ItemName}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </UserControl>

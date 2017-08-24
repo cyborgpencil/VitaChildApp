@@ -7,24 +7,22 @@ namespace VitaChildApp.Models
 {
     public enum FoodType
     {
-        [Description("Milk")]
-        MILK,
+        //[Description("Milk")]
+        //MILK,
         [Description("Fluid")]
         FLUID,
-        [Description("Meat")]
-        MEAT,
+        //[Description("Meat")]
+        //MEAT,
         [Description("Meat Alternate")]
         MEAT_ALTERNATE,
-        [Description("Juice")]
-        JUICE,
+        //[Description("Juice")]
+        //JUICE,
         [Description("Fruit")]
         FRUIT,
         [Description("Vegetable")]
         VEGETABLE,
         [Description("Grains")]
         GRAINS,
-        [Description("Breads")]
-        BREADS
     }
     public class FoodItem : BindableBase
     {

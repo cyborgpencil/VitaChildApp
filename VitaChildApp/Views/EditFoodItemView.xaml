@@ -58,29 +58,7 @@
                    
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Background="AliceBlue" Margin="5" Height="70"  HorizontalAlignment="Center">
-                <TextBlock Text="Food Category:" Margin="5"/>
-                <StackPanel Orientation="Horizontal">
-                <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\drinks.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
-                <CheckBox />
-                    <TextBlock Text="Milk/Liquids" Margin="5"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\meatpng.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
-                <CheckBox />
-                    <TextBlock Text="Meat/Other" Margin="5"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\veggies.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
-                    <CheckBox />
-                    <TextBlock Text="Vegetables" Margin="5"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="C:\Users\cybor\Source\Repos\VitaChildApp\VitaChildApp\Images\bread.png" Width="50" Height="50" HorizontalAlignment="Left" Margin="5"/>
-                    <CheckBox />
-                    <TextBlock Text="Breads" Margin="5"/>
-                </StackPanel>
-            </StackPanel>
+            
         </StackPanel>
     </StackPanel>
 </UserControl>
