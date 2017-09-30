@@ -77,7 +77,10 @@ namespace VitaChildApp.ViewModels
         public DateTime SelectedDate
         {
             get { return _selectedDate; }
-            set { SetProperty(ref _selectedDate, value); }
+            set {
+                SetProperty(ref _selectedDate, value);
+                    SetActiveMealdDay();
+            }
         }
 
         private ObservableCollection<FoodItem> _breakfastList;
@@ -198,9 +201,36 @@ namespace VitaChildApp.ViewModels
             get { return _selectedEV_SnackIndex; }
             set { SetProperty(ref _selectedEV_SnackIndex, value); }
         }
+
+        private ObservableCollection<MealDay> _workingMealDayList;
+        public ObservableCollection<MealDay> WorkingMealDayList
+        {
+            get { return _workingMealDayList; }
+            set { SetProperty(ref _workingMealDayList, value); }
+        }
+
+        private int _activeMealDayIndex;
+        public int ActiveMealDayIndex
+        {
+            get { return _activeMealDayIndex; }
+            set {
+                if (value == -1)
+                    value = 0;  
+                SetProperty(   
+                    ref _activeMealDayIndex, value);
+            }
+        }
+
+        private ObservableCollection<MealDay> _mealDayList;
+        public ObservableCollection<MealDay> MealDayList
+        {
+            get { return _mealDayList; }
+            set { SetProperty(ref _mealDayList, value); }
+        }
         #endregion
 
         #region PROPS
+        private MealDay _workingMealDay;
         #endregion
 
         #region COMMANDS
@@ -288,11 +318,20 @@ namespace VitaChildApp.ViewModels
             get { return _removeEV_SnackItemCommand; }
             set { SetProperty(ref _removeEV_SnackItemCommand, value); }
         }
+
+        private DelegateCommand _addMealDayCommand;
+        public DelegateCommand AddMealDayCommand
+        {
+            get { return _addMealDayCommand; }
+            set { SetProperty(ref _addMealDayCommand, value); }
+        }
         #endregion
 
         #region CTOR
         public MealDayViewModel()
         {
+            //DEBUG
+
             LoadedCommand = new DelegateCommand(Loaded);
 
             IList<FoodItem> FoodItems = FoodItemsFileManager.Instance.GetFoodItemList();
@@ -318,8 +357,13 @@ namespace VitaChildApp.ViewModels
             RemovePM_SnackItemCommand = new DelegateCommand(RemovePM_SnackItem);
             AddSupperItemCommand = new DelegateCommand(AddSupperItem);
             RemoveSupperItemCommand = new DelegateCommand(RemoveSupperItem);
-            AddEV_SnackItemCommand = new DelegateCommand(AddEV_SnackItem);
-            RemoveEV_SnackItemCommand = new DelegateCommand(RemoveEV_SnackItem);
+            //AddEV_SnackItemCommand = new DelegateCommand(AddEV_SnackItem);
+            //RemoveEV_SnackItemCommand = new DelegateCommand(RemoveEV_SnackItem);
+
+            ActiveMealDayIndex = 0;
+
+            //Check loaded MealDay List
+            WorkingMealDayList = new ObservableCollection<MealDay>();
         }
 
         #endregion
@@ -334,10 +378,28 @@ namespace VitaChildApp.ViewModels
 
             // Refresh CollectionViewSource
             CurrentFoodList.Refresh();
+
+            // Load MealDay based on date 
+
+            //DEBUG
+            MealDay m1 = new MealDay();
+            m1.MealDate = DateTime.Now;
+            m1.BreakfastMeal.FoodItemList = new ObservableCollection<FoodItem>();
+            m1.BreakfastMeal.FoodItemList.Add(new FoodItem { ItemName = "Current Test Name", FoodType = FoodType.VEGETABLE });
+            WorkingMealDayList.Add(m1);
+
+            //compar date to any in loaded list
+            MealDay m2 = new MealDay();
+            m2.MealDate = DateTime.Now.AddDays(-1);
+            m2.BreakfastMeal.FoodItemList = new ObservableCollection<FoodItem>();
+            m2.BreakfastMeal.FoodItemList.Add(new FoodItem { ItemName = "YesterDay Test Name", FoodType = FoodType.VEGETABLE });
+            WorkingMealDayList.Add(m2);
+
+            SetActiveMealdDay();
         }
         private void AddBreakfast()
         {
-            if(SelectedFoodItem != null)
+            if (SelectedFoodItem != null)
             {
                 BreakfastList.Add(SelectedFoodItem);
             }
@@ -345,7 +407,7 @@ namespace VitaChildApp.ViewModels
         }
         private void RemoveBreakfastItems()
         {
-            if(SelectedBreakfastItem != null)
+            if (SelectedBreakfastItem != null)
             {
                 BreakfastList.RemoveAt(BreakfastSelIndex);
             }
@@ -354,6 +416,41 @@ namespace VitaChildApp.ViewModels
         #endregion
 
         #region METHODS
+        private MealDay MealDateMatch()
+        {
+            if (WorkingMealDayList != null)
+            {
+                for (int i = 0; i < WorkingMealDayList.Count; i++)
+                {
+                    if (WorkingMealDayList[i].MealDate.Date.Equals(SelectedDate))
+                        return WorkingMealDayList[i];
+                }
+            }
+
+            // No dates matched
+            return null;
+        }
+        private void SetMealDate()
+        {
+            // Set BreakfastList
+            BreakfastList = _workingMealDay.BreakfastMeal.FoodItemList;
+            // Set AM_Snack
+
+            // Set Lunch
+
+            // Set PM_Snack
+
+            // Set Supper
+
+            // Set EV_Snack
+        }
+
+        private void ClearMealDate()
+        {
+            WorkingMealDayList = new ObservableCollection<MealDay>();
+            BreakfastList = new ObservableCollection<FoodItem>();
+        }
+
         private void FluidCheck()
         {
             if (FluidChecked)
@@ -418,7 +515,7 @@ namespace VitaChildApp.ViewModels
         }
         private void SearchFilter()
         {
-            if(string.IsNullOrEmpty(SearchText))
+            if (string.IsNullOrEmpty(SearchText))
             {
                 CurrentFoodList.Filter = null;
             }
@@ -434,7 +531,7 @@ namespace VitaChildApp.ViewModels
 
         private void RemoveAMSnack()
         {
-            if(SelectedAMSnackIndex != -1)
+            if (SelectedAMSnackIndex != -1)
             {
                 AM_SnackList.RemoveAt(SelectedAMSnackIndex);
             }
@@ -444,7 +541,7 @@ namespace VitaChildApp.ViewModels
 
         private void AddAMSnack()
         {
-           if(SelectedFoodItem != null)
+            if (SelectedFoodItem != null)
             {
                 AM_SnackList.Add(SelectedFoodItem);
             }
@@ -485,18 +582,17 @@ namespace VitaChildApp.ViewModels
                 SupperList.RemoveAt(SelectedSupperIndex);
             SelectedSupperIndex = -1;
         }
-        private void AddEV_SnackItem()
+        
+
+        private void SetActiveMealdDay()
         {
-            if (SelectedFoodItem != null)
-                EV_SnackList.Add(SelectedFoodItem);
-            
-        }
-        private void RemoveEV_SnackItem()
-        {
-            if (SelectedEV_SnackItem != null)
-                EV_SnackList.RemoveAt(SelectedEV_SnackIndex);
-            SelectedEV_SnackIndex = -1;
+            _workingMealDay = MealDateMatch();
+            if (_workingMealDay != null)
+                SetMealDate();
+            else
+                ClearMealDate();
         }
         #endregion
     }
+
 }

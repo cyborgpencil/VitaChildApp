@@ -39,10 +39,10 @@
         <TextBlock Text="EDIT MEALS FOR THE DAY" FontSize="30" TextAlignment="Center" Grid.Column="1" Grid.Row="0"/>
         <StackPanel Grid.Column="0" Grid.Row="0">
             <TextBlock Text="Date:" />
-            <DatePicker SelectedDate="{Binding SelectedDate}"/>
+            <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1">
-            <Button Content="Save" Margin="5"/>
+            <Button Command="{Binding AddMealDayCommand}"  Content="Save" Margin="5"/>
             <Button Content="Delete" Margin="5"/>
         </StackPanel>
         
@@ -95,7 +95,7 @@
         <StackPanel Grid.Column="1" Grid.Row="3" Margin="2" Orientation="Horizontal">
             <Button Content="Add Food Item" Margin="2" MinHeight="10" Command="{Binding AddBreakfastCommand}" />
             <Button  Content="Remove Item" Margin="2" MinHeight="10" Command="{Binding RemoveBreakfastListCommand}"/>
-            <ListView ItemsSource="{Binding BreakfastList}" SelectedItem="{Binding SelectedBreakfastItem}" SelectedIndex="{Binding BreakfastSelIndex}" Height="40" Width="500" Margin="2">
+            <ListView ItemsSource="{Binding BreakfastList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBreakfastItem}" SelectedIndex="{Binding BreakfastSelIndex}" Height="40" Width="500" Margin="2">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding ItemName}"/>
